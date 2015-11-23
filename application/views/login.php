@@ -166,9 +166,11 @@ body{
 		</div>
 		<br>
 		<div class="login">
+                <form method="post" action="<?php echo site_url('login/validateUser')?>">
 				<input type="text" placeholder="username" name="user"><br>
 				<input type="password" placeholder="password" name="password"><br>
-				<input type="button" value="Login">
+				<input type="submit" value="Login">
+                </form>
 		</div>
     <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
     
