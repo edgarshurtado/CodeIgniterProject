@@ -162,7 +162,7 @@ body{
     <div class="body"></div>
 		<div class="grad"></div>
 		<div class="header">
-			<div>Edgar Code<span>Ignite</span></div>
+			<div>Edgar Code<span>Igniter</span></div>
 		</div>
 		<br>
 		<div class="login">
