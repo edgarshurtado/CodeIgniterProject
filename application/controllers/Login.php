@@ -7,6 +7,10 @@ class Login extends CI_Controller {
     {
         parent::__construct();
         $this->load->helper('url');
+        $this->load->library('grocery_CRUD');
+        $this->load->database();
+
+        date_default_timezone_set('Europe/Madrid');
     }
 
 	public function index()
@@ -14,18 +18,24 @@ class Login extends CI_Controller {
 		$this->load->view('login');
 	}
 
-    public function test()
-    {
-        echo "Hola desde controlador";
-    }
-
     public function validateUser()
     {
         $userName = $_POST["user"];
         $password = $_POST["password"];
 
-        $data = array('user' => $userName, 'password' => $password);
 
-        $this->load->view("admin.php", $data);
+        $data = array('user' => $userName, 'password' => $password);
+        $this->load->model('users_model');
+        if($this->users_model->isValidUser($userName, $password)){
+            $this->load->view("admin", $data);
+        } else {
+            $this->load->view("login");
+        }
+    }
+
+    public function incidencias()
+    {
+        $output = $this->grocery_crud->render();
+        $this->load->view("incidencias", $output);
     }
 }
