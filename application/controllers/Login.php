@@ -44,6 +44,7 @@ class Login extends CI_Controller {
         $crud->set_table("usuarios");
         $crud->columns("nombre", "clave", "email");
         $crud->fields("nombre", "clave", "email");
+        $crud->field_type("clave", "password");
         $crud->callback_before_insert(array($this, "encrypt_password_callback"));
         
         $output = $crud->render();
