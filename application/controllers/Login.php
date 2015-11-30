@@ -35,7 +35,18 @@ class Login extends CI_Controller {
 
     public function incidencias()
     {
+
         $output = $this->grocery_crud->render();
+        $this->load->view("incidencias", $output);
+    }
+
+    public function usuarios()
+    {
+        $crud = new grocery_CRUD();
+        $crud->set_table("usuarios");
+        $crud->fields("nombre", "clave", "email");
+        
+        $output = $crud->render();
         $this->load->view("incidencias", $output);
     }
 }
