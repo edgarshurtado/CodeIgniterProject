@@ -9,7 +9,7 @@ class Login extends CI_Controller {
         $this->load->helper('url');
         $this->load->library('grocery_CRUD');
         $this->load->database();
-
+        $this->load->model('Users_model');
         date_default_timezone_set('Europe/Madrid');
     }
 
@@ -24,9 +24,9 @@ class Login extends CI_Controller {
         $password = $_POST["password"];
 
 
-        $data = array('user' => $userName, 'password' => $password);
         $this->load->model('users_model');
         if($this->users_model->isValidUser($userName, $password)){
+            $data = array('user' => $userName, 'password' => $password);
             $this->load->view("admin", $data);
         } else {
             $this->load->view("login");
@@ -45,8 +45,16 @@ class Login extends CI_Controller {
         $crud = new grocery_CRUD();
         $crud->set_table("usuarios");
         $crud->fields("nombre", "clave", "email");
+        $crud->callback_before_insert(array($this, "encrypt_password_callback"));
         
         $output = $crud->render();
         $this->load->view("incidencias", $output);
+    }
+
+    public function encrypt_password_callback($post_array){
+        $post_array['clave'] = 
+            $this->Users_model->encrypt_password($post_array['clave']);
+
+        return $post_array;
     }
 }

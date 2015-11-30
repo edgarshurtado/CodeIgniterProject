@@ -6,6 +6,14 @@
  */
 class Users_model extends CI_Model
 {
+    /**
+     * @param mixed 
+     */
+    public function __construct()
+    {
+        $this->load->library('encrypt');
+    }
+    
     function isValidUser($userName, $password){
         $this->load->database();           
 
@@ -18,5 +26,10 @@ class Users_model extends CI_Model
 
         return $query->num_rows() == 1;
 
+    }
+
+    function encrypt_password($password){
+        $encriptedPassword = $this->encrypt->encode($password);
+        return $encriptedPassword;
     }
 }
