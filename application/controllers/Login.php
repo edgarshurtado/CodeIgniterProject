@@ -10,6 +10,7 @@ class Login extends CI_Controller {
         $this->load->library('grocery_CRUD');
         $this->load->database();
         $this->load->model('Users_model');
+        $this->load->library('session');
         date_default_timezone_set('Europe/Madrid');
     }
 
@@ -24,8 +25,8 @@ class Login extends CI_Controller {
         $password = $_POST["password"];
 
         if($this->Users_model->isValidUserEncrypt($userName, $password)){
-            $data = array('user' => $userName, 'password' => $password);
-            $this->load->view("admin", $data);
+            $this->session->set_userdata('usuario', $userName);
+            $this->load->view("admin");
         } else {
             $this->load->view("login");
         }
