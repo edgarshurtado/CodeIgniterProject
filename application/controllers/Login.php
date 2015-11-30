@@ -33,8 +33,10 @@ class Login extends CI_Controller {
 
     public function incidencias()
     {
-
-        $output = $this->grocery_crud->render();
+        $crud = new grocery_CRUD();
+        $crud->field_type("idtipo", "dropdown", array(
+            '1'=>'algo', '2'=>'algo mas'));
+        $output = $crud->render();
         $this->load->view("incidencias", $output);
     }
 
