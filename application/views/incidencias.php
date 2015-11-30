@@ -10,6 +10,8 @@ foreach($css_files as $file): ?>
 <?php endforeach; ?>
 </head>
 <body>
+ <a href="<?php echo site_url("login/incidencias")?>">Incidencias</a> |
+ <a href="<?php echo site_url("login/usuarios")?>">Usuarios</a>
     <div><?php echo $output; ?> </div>
     </body>
 </html>
