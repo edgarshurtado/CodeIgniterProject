@@ -36,7 +36,10 @@ class Login extends CI_Controller {
     {
         $crud = new grocery_CRUD();
         $crud->set_table('incidencias');
-        $crud->set_relation('idtipo', 'tipos_incidencias', 'descripcion');
+        $crud->set_subject('Incidents');
+        $crud->set_relation(
+            'idtipo', 'tipos_incidencias', 'descripcion_incidencia');
+
         $output = $crud->render();
         $this->load->view("incidencias", $output);
     }
