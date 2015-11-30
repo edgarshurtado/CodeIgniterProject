@@ -23,9 +23,7 @@ class Login extends CI_Controller {
         $userName = $_POST["user"];
         $password = $_POST["password"];
 
-
-        $this->load->model('users_model');
-        if($this->users_model->isValidUser($userName, $password)){
+        if($this->Users_model->isValidUserEncrypt($userName, $password)){
             $data = array('user' => $userName, 'password' => $password);
             $this->load->view("admin", $data);
         } else {
@@ -44,6 +42,7 @@ class Login extends CI_Controller {
     {
         $crud = new grocery_CRUD();
         $crud->set_table("usuarios");
+        $crud->columns("nombre", "clave", "email");
         $crud->fields("nombre", "clave", "email");
         $crud->callback_before_insert(array($this, "encrypt_password_callback"));
         
@@ -51,7 +50,7 @@ class Login extends CI_Controller {
         $this->load->view("incidencias", $output);
     }
 
-    public function encrypt_password_callback($post_array){
+    function encrypt_password_callback($post_array){
         $post_array['clave'] = 
             $this->Users_model->encrypt_password($post_array['clave']);
 

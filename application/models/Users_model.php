@@ -14,22 +14,32 @@ class Users_model extends CI_Model
         $this->load->library('encrypt');
     }
     
-    function isValidUser($userName, $password){
+    function isValidUserEncrypt($userName, $password){
         $this->load->database();           
 
         $sql = "SELECT *
                 FROM usuarios
-                WHERE nombre = ?
-                AND clave = ?";
+                WHERE nombre = ?";
 
-        $query = $this->db->query($sql, array($userName, $password));
+        $query = $this->db->query($sql, array($userName));
+        $userStoredPassword;
 
-        return $query->num_rows() == 1;
+        foreach ($query->result() as $row){
+            $userStoredPassword = $row->clave;
+        }
+
+        $userStoredPassword = $this->decrypt_password($userStoredPassword);
+
+        return $password == $userStoredPassword;
 
     }
 
     function encrypt_password($password){
         $encriptedPassword = $this->encrypt->encode($password);
         return $encriptedPassword;
+    }
+
+    function decrypt_password($password){
+        return $this->encrypt->decode($password);
     }
 }
