@@ -32,6 +32,12 @@ class Login extends CI_Controller {
         }
     }
 
+    public function logout(){
+        $this->session->set_userdata('usuario', "");
+        $this->session->sess_destroy();
+        $this->load->view('login');
+    }
+
     public function incidencias()
     {
         $crud = new grocery_CRUD();

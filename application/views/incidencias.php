@@ -8,10 +8,17 @@ foreach($css_files as $file): ?>
 <?php foreach($js_files as $file): ?>
 	<script src="<?php echo $file; ?>"></script>
 <?php endforeach; ?>
+
+<?php
+    if(!isset($_SESSION['usuario'])){
+        header("location: ". site_url("login/index"));
+    }
+?>
 </head>
 <body>
  <a href="<?php echo site_url("login/incidencias")?>">Incidencias</a> |
- <a href="<?php echo site_url("login/usuarios")?>">Usuarios</a>
+ <a href="<?php echo site_url("login/usuarios")?>">Usuarios</a> |
+ <a href="<?php echo site_url("login/logout")?>">Logout</a>
     <div><?php echo $output; ?> </div>
     </body>
 </html>
