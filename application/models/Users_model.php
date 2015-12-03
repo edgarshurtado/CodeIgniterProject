@@ -14,7 +14,7 @@ class Users_model extends CI_Model
         $this->load->library('encrypt');
     }
     
-    function isValidUserEncrypt($userName, $password){
+    function isValidUser($userName, $password){
         $this->load->database();           
 
         $sql = "SELECT *
