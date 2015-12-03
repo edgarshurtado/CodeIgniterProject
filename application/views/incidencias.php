@@ -18,6 +18,8 @@ foreach($css_files as $file): ?>
 <body>
  <a href="<?php echo site_url("login/incidencias")?>">Incidencias</a> |
  <a href="<?php echo site_url("login/usuarios")?>">Usuarios</a> |
+ <a href="<?php echo site_url("login/roles")?>">Roles</a> |
+ <a href="<?php echo site_url("login/tiposIncidencias")?>">Tipos Incidencias</a> |
  <a href="<?php echo site_url("login/logout")?>">Logout</a>
     <div><?php echo $output; ?> </div>
     </body>
