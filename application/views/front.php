@@ -94,6 +94,7 @@
 
 	<h1>Responsive Table</h1>
   
+    <a href="<?php echo site_url("admin/index") ?>"> Login </a>
 	<table>
 		<thead>
 		<tr>
@@ -107,10 +108,12 @@
 		</thead>
 		<tbody>
         <?php
+//Fill table
+$fields = array("numero", "tipo", "descripcion", "ubicacion",
+                "usuario", "prioridad");
+
 foreach($incidents as $incident){
     echo "<tr>";
-    $fields = array("numero", "tipo", "descripcion", "ubicacion",
-                    "usuario", "prioridad");
     foreach($fields as $field){
         echo "<td>";
         echo $incident->$field;
