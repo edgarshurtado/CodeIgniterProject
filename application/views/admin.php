@@ -21,7 +21,7 @@ Logged:<?php echo $_SESSION['name']?>
  <a href="<?php echo site_url("backoffice/usuarios")?>">Usuarios</a> |
  <a href="<?php echo site_url("backoffice/roles")?>">Roles</a> |
  <a href="<?php echo site_url("backoffice/tiposIncidencias")?>">Tipos Incidencias</a> |
- <a href="<?php echo site_url("backoffice/logout")?>">Logout</a>
+ <a href="<?php echo site_url("login/logout")?>">Logout</a>
     <div><?php echo $output; ?> </div>
     </body>
 </html>
