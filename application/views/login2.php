@@ -70,7 +70,7 @@
 	
 	<div class="content clearfix">
 		
-		<form action="#" method="post">
+		<form action="<?php echo site_url('login/validateUser')?>" method="post">
 		
 			<h1>Member Login</h1>		
 			
@@ -80,7 +80,7 @@
 				
 				<div class="field">
 					<label for="username">Username</label>
-					<input type="text" id="username" name="username" value="" placeholder="Username" class="login username-field" />
+					<input type="text" id="username" name="user" value="" placeholder="Username" class="login username-field" />
 				</div> <!-- /field -->
 				
 				<div class="field">
