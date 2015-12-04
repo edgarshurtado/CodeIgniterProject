@@ -12,10 +12,12 @@ class Front_model extends CI_Model
 
     public function getOpenIncidents()
     {
-        $sql = "SELECT numero, idtipo as tipo, descripcion, ubicacion, 
-            idusuario as usuario, prioridad
-                from incidencias
-                WHERE estado = 'ABIERTA'";
+        $sql = "SELECT numero, descripcion_incidencia as tipo, descripcion, ubicacion, 
+            `usuarios`.nombre as usuario, prioridad
+                from incidencias, usuarios, tipos_incidencias
+                WHERE `incidencias`.idusuario = `usuarios`.id 
+                AND `tipos_incidencias`.idtipo = `incidencias`.idtipo
+                AND estado = 'ABIERTA'";
 
         $query = $this->db->query($sql);
 
