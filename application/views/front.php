@@ -62,8 +62,8 @@
 		td:nth-of-type(2):before { content: "Tipo"; }
 		td:nth-of-type(3):before { content: "Descripción"; }
 		td:nth-of-type(4):before { content: "Ubicación"; }
-		td:nth-of-type(6):before { content: "Usuario"; }
-		td:nth-of-type(7):before { content: "Prioridad"; }
+		td:nth-of-type(5):before { content: "Usuario"; }
+		td:nth-of-type(6):before { content: "Prioridad"; }
 	}
 	
 	/* Smartphones (portrait and landscape) ----------- */
