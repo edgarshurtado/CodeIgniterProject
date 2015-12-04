@@ -151,13 +151,11 @@ foreach($css_files as $file): ?>
 <!-- Le javascript
 ================================================== --> 
 <!-- Placed at the end of the document so the pages load faster --> 
-<script src="<?php echo base_url("assets/admin-template/js/jquery-1.7.2.min.js")?>"></script> 
 <script src="<?php echo base_url("assets/admin-template/js/excanvas.min.js")?>"></script> 
 <script src="<?php echo base_url("assets/admin-template/js/chart.min.js")?>" type="text/javascript"></script> 
 <script src="<?php echo base_url("assets/admin-template/js/bootstrap.js")?>"></script>
 <script language="javascript" type="text/javascript" src="<?php echo base_url("assets/admin-template/js/full-calendar/fullcalendar.min.js")?>"></script>
  
-<script src="<?php echo base_url("assets/admin-template/js/base.js")?>"></script> 
 <script>     
 
         var lineChartData = {

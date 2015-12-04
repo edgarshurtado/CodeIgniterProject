@@ -30,13 +30,13 @@ class Login extends CI_Controller {
             $this->session->set_userdata($userData);
             $this->load->view("welcome_message");
         } else {
-            $this->load->view("login");
+            $this->load->view("login2");
         }
     }
 
     public function logout(){
         $this->session->set_userdata('usuario', "");
         $this->session->sess_destroy();
-        $this->load->view('login');
+        redirect('Front_controller/index');
     }
 }
