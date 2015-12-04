@@ -41,13 +41,51 @@ class Crud_output extends CI_Model
 
     public function new_incident_callback($post_array)
     {
-        $post_array['numero'] = intval(date("Ymdhi"));
+        $post_array['numero'] = intval(date("YmdHi"));
         $post_array['idusuario'] = $this->session->id;
         $post_array['estado'] = "ABIERTA";
-        $post_array['fecha_alta'] = date("Y-m-d h:i:s");
+        $post_array['fecha_alta'] = date("Y-m-d H:i:s");
         $post_array['fecha_fin'] = "0000-00-00 00:00:00";
 
         return $post_array;
+    }
+
+    public function usuarios()
+    {
+        $crud = new grocery_CRUD();
+        $crud->set_table("usuarios");
+        $crud->columns("nombre", "clave", "email");
+        $crud->fields("nombre", "clave", "email");
+        $crud->field_type("clave", "password");
+        $crud->required_fields("nombre", "clave", "email");
+        $crud->callback_before_insert(
+            array($this, "encrypt_password_callback"));
+        
+        return $crud->render();
+    }
+
+    function encrypt_password_callback($post_array){
+        $post_array['clave'] = 
+            $this->Users_model->encrypt_password($post_array['clave']);
+
+        return $post_array;
+    }
+
+    public function roles()
+    {
+        $crud = new grocery_CRUD();
+        $crud->set_table("roles");
+        $crud->field_type("nivel", "dropdown", array(0,1,2,3));
+
+        return $crud->render();
+    }
+
+    public function tiposIncidencias()
+    {
+        $crud = new grocery_CRUD();
+        $crud->set_table("tipos_incidencias");
+
+        return $crud->render();
     }
 }
 
