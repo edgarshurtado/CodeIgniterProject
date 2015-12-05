@@ -17,7 +17,12 @@ class Front_controller extends CI_Controller
     public function index()
     {
         $this->load->model("Front_model");
-        $data = array("incidents" => $this->Front_model->getOpenIncidents());
+        $this->load->library("pagination");
+
+        $incidents =$this->Front_model->getOpenIncidents();
+
+
+        $data = array("incidents" => $incidents);
         $this->load->view('front', $data);
     }
     

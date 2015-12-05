@@ -20,7 +20,7 @@ class Backoffice extends CI_Controller {
     public function incidencias()
     {
         $output = $this->Crud_output->incidencias();
-        $this->load->view("Backoffice_view", $output);
+        $this->load->view("incidents", $output);
     }
 
     public function usuarios()

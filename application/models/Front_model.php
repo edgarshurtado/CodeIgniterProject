@@ -23,4 +23,13 @@ class Front_model extends CI_Model
 
         return $query->result();
     }
+
+    public function getOpenIncidentsNum()
+    {
+        $sql = "SELECT * from incidencias WHERE estado = 'ABIERTA'";
+
+        $query = $this->db->query($sql);
+
+        return $query->num_rownum_rows();
+    }
 }
