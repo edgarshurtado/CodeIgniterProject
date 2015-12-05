@@ -64,6 +64,7 @@
 		td:nth-of-type(4):before { content: "Ubicación"; }
 		td:nth-of-type(5):before { content: "Usuario"; }
 		td:nth-of-type(6):before { content: "Prioridad"; }
+		td:nth-of-type(7):before { content: "Fecha Alta"; }
 	}
 	
 	/* Smartphones (portrait and landscape) ----------- */
@@ -104,13 +105,14 @@
 			<th>Ubicación</th>
 			<th>Usuario</th>
 			<th>Prioridad</th>
+			<th>Fecha Alta</th>
 		</tr>
 		</thead>
 		<tbody>
         <?php
 //Fill table
 $fields = array("numero", "tipo", "descripcion", "ubicacion",
-                "usuario", "prioridad");
+                "usuario", "prioridad", "fecha_alta");
 
 foreach($incidents as $incident){
     echo "<tr>";
