@@ -35,7 +35,7 @@ foreach($css_files as $file): ?>
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container"> 
-        <a class="brand" href="index.html">Bootstrap Admin Template </a>
+        <a class="brand" href="index.html">Edgar CodeIgniter</a>
         <ul class="nav pull-right">
           <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
             class="icon-user"></i> <?php echo $_SESSION['name'] ?> <b class="caret"></b></a>
