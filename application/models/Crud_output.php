@@ -17,6 +17,8 @@ class Crud_output extends CI_Model
         $this->load->database();
         $this->load->library('grocery_CRUD');
         $this->load->library('session');
+        $this->load->model('email_model');
+        $this->load->model('database_retrieve');
         date_default_timezone_set('Europe/Madrid');
     }
     
@@ -46,6 +48,16 @@ class Crud_output extends CI_Model
         $post_array['estado'] = "ABIERTA";
         $post_array['fecha_alta'] = date("Y-m-d H:i:s");
         $post_array['fecha_fin'] = "0000-00-00 00:00:00";
+
+        //Email the admin
+        $body = "Numero Incidencia: ". $post_array['numero'] . "\n";
+        $body = $body . "Fecha alta: ".$post_array['fecha_alta'] . "\n";
+        $typeIncidentName = $this->database_retrieve-> 
+            getIncidentTypeName($post_array['idtipo']);
+        $body = $body . "Tipo Incidencia: ". $typeIncidentName . "\n";
+        $body = $body ."Decripcion: \n".$post_array['descripcion'] . "\n";
+
+        $this->email_model->mailNewIncident("edsanhu@gmail.com", $body);
 
         return $post_array;
     }

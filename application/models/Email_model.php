@@ -27,4 +27,13 @@ class Email_model extends CI_Model
        $this->email->send();
     }
     
+    public function mailNewIncident($to, $body)
+    {
+       $this->email->to("edsanhu@gmail.com");
+       $this->email->from("system@edgarsh.es");
+       $this->email->subject("New Incident");
+       $this->email->message("$body");
+
+       $this->email->send();
+    }
 }
