@@ -27,19 +27,18 @@ class Crud_output extends CI_Model
         $crud = new grocery_CRUD();
         $crud->set_table('incidencias');
         $crud->set_subject('Incidents');
-        $crud->set_relation(
-            'idtipo', 'tipos_incidencias', 'descripcion_incidencia');
+        $crud->set_relation( 'idtipo', 'tipos_incidencias',
+           'descripcion_incidencia');
 
-
-
-        $crud->add_fields("idtipo", "descripcion", "ubicacion", 
-           "persona_detecta", "prioridad");
-        $crud->callback_before_insert(array($this, "new_incident_callback"));
-
-
-        $crud->edit_fields("descripcion", "estado", "numero");
+        $crud->field_type('idusuario', 'hidden');
+        $crud->field_type('fecha_alta', 'hidden');
+        $crud->field_type('fecha_fin', 'hidden');
         $crud->field_type('numero', 'hidden');
-        $crud->callback_before_update("estado", array($this, "edit_incident_callback"));
+
+        $crud->edit_fields("descripcion", "estado", "numero", "fecha_fin");
+
+        $crud->callback_before_insert(array($this, "new_incident_callback"));
+        $crud->callback_before_update(array($this, "edit_incident_callback"));
 
         return $crud->render();
     }
@@ -48,7 +47,6 @@ class Crud_output extends CI_Model
     {
         $post_array['numero'] = intval(date("YmdHi"));
         $post_array['idusuario'] = $this->session->id;
-        $post_array['estado'] = "ABIERTA";
         $post_array['fecha_alta'] = date("Y-m-d H:i:s");
         $post_array['fecha_fin'] = "0000-00-00 00:00:00";
 
@@ -70,13 +68,9 @@ class Crud_output extends CI_Model
 
     public function edit_incident_callback($post_array)
     {
-        $incidentId = $post_array['numero'];
-        $incidentCurrentState = $this->database_retrieve->
-            getIncidentStatus($incidentID);
+        $this->email_model->mailNewIncident("edsanhu@gmail.com", "test");
 
-        if($incidentCurrentState != $post_array['estado']){
-            $this->email_model->mailNewIncident("edsanhu@gmail", "cambiado");
-        }
+        return $post_array;
     }
 
     public function usuarios()
