@@ -71,12 +71,18 @@ class Crud_output extends CI_Model
         $incidentID = $post_array['numero'];
         $incidentInfo = $this->database_retrieve->getIncident($incidentID);
         $incidentType = $incidentInfo->idtipo;
+        $incidentCurrentState = $incidentInfo->estado;
 
+        if($incidentCurrentState != $post_array['estado']){
+            
         $emails = $this->database_retrieve->getTechniciansEmails($incidentType);
 
         $body = "Cambio de estado en la incidencia: $incidentID";
 
         $this->email_model->mailNewIncident($emails, $body);
+
+        }
+
 
         return $post_array;
     }
