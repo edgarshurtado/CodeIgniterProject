@@ -66,5 +66,15 @@ class Database_retrieve extends CI_Model
         return $emails;
 
     }
+
+    public function getIncidentStatus($incidentId){
+        $sql = "SELECT estado
+                FROM incidencias
+                WHERE numero = ?";
+
+        $query = $this->db->query($sql, array($incidentId));
+
+        return $this->row()->estado;
+    }
     
 }

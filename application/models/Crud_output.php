@@ -30,13 +30,16 @@ class Crud_output extends CI_Model
         $crud->set_relation(
             'idtipo', 'tipos_incidencias', 'descripcion_incidencia');
 
-        $invisibleFields = array("numero", "estado", "fecha_alta", 
-            "fecha_fin", "idusuario");
-        foreach($invisibleFields as $field){
-            $crud->change_field_type($field, "invisible");
-        }
 
+
+        $crud->add_fields("idtipo", "descripcion", "ubicacion", 
+           "persona_detecta", "prioridad");
         $crud->callback_before_insert(array($this, "new_incident_callback"));
+
+
+        $crud->edit_fields("descripcion", "estado", "numero");
+        $crud->field_type('numero', 'hidden');
+        $crud->callback_before_update("estado", array($this, "edit_incident_callback"));
 
         return $crud->render();
     }
@@ -49,7 +52,7 @@ class Crud_output extends CI_Model
         $post_array['fecha_alta'] = date("Y-m-d H:i:s");
         $post_array['fecha_fin'] = "0000-00-00 00:00:00";
 
-        //Email the admin
+        //Email configuration
         $body = "Numero Incidencia: ". $post_array['numero'] . "\n";
         $body = $body . "Fecha alta: ".$post_array['fecha_alta'] . "\n";
         $typeIncidentName = $this->database_retrieve-> 
@@ -65,12 +68,19 @@ class Crud_output extends CI_Model
         return $post_array;
     }
 
+    public function edit_incident_callback($post_array)
+    {
+
+    }
+
     public function usuarios()
     {
         $crud = new grocery_CRUD();
         $crud->set_table("usuarios");
-        $crud->columns("nombre", "clave", "email");
-        $crud->fields("nombre", "clave", "email");
+        $crud->columns("nombre", "clave", "email", "idrol");
+        $crud->fields("nombre", "clave", "email", "idrol");
+        $crud->set_relation("idrol", "roles", "descripcion");
+        $crud->display_as("idrol", "Rol");
         $crud->field_type("clave", "password");
         $crud->required_fields("nombre", "clave", "email");
         $crud->callback_before_insert(
@@ -99,6 +109,12 @@ class Crud_output extends CI_Model
     {
         $crud = new grocery_CRUD();
         $crud->set_table("tipos_incidencias");
+        $crud->set_relation("idusuario", "usuarios", "email");
+        $crud->display_as("idusuario", "Técnico 1");
+        $crud->set_relation("idusuario2", "usuarios", "email");
+        $crud->display_as("idusuario2", "Técnico 2");
+        $crud->set_relation("idusuario3", "usuarios", "email");
+        $crud->display_as("idusuario3", "Técnico 3");
 
         return $crud->render();
     }
