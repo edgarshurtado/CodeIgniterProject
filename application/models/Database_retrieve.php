@@ -76,5 +76,16 @@ class Database_retrieve extends CI_Model
 
         return $query->row();
     }
+
+    public function getUserMail($userid)
+    {
+        $sql = "SELECT email
+                FROM usuarios
+                WHERE id = ?";
+
+        $query = $this->db->query($sql, array($userid));
+
+        return $query->row()->email;
+    }
     
 }
