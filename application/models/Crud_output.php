@@ -70,7 +70,13 @@ class Crud_output extends CI_Model
 
     public function edit_incident_callback($post_array)
     {
+        $incidentId = $post_array['numero'];
+        $incidentCurrentState = $this->database_retrieve->
+            getIncidentStatus($incidentID);
 
+        if($incidentCurrentState != $post_array['estado']){
+            $this->email_model->mailNewIncident("edsanhu@gmail", "cambiado");
+        }
     }
 
     public function usuarios()

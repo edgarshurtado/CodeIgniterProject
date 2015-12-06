@@ -68,13 +68,13 @@ class Database_retrieve extends CI_Model
     }
 
     public function getIncidentStatus($incidentId){
-        $sql = "SELECT estado
+        $sql = "SELECT *
                 FROM incidencias
                 WHERE numero = ?";
 
         $query = $this->db->query($sql, array($incidentId));
 
-        return $this->row()->estado;
+        return $this->row();
     }
     
 }
