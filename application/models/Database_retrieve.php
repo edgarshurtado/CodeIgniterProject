@@ -36,24 +36,31 @@ class Database_retrieve extends CI_Model
      */
     public function getTechniciansEmails($typeid)
     {
-        $sql = "SELECT idusuario, idusuario2, idusuario3
-                FROM tipos_incidencias
-                WHERE idtipo = $typeid";
+        $sql= "SELECT email
+                FROM usuarios, tipos_incidencias
+                WHERE tipos_incidencias.idtipo = $typeid
+                    AND `tipos_incidencias`.`idusuario` = usuarios.id
+                    
+                UNION
+
+                SELECT email
+                    FROM usuarios, tipos_incidencias
+                    WHERE tipos_incidencias.idtipo = $typeid
+                        AND `tipos_incidencias`.`idusuario2` = usuarios.id
+                    
+                UNION    
+                        
+                SELECT email
+                    FROM usuarios, tipos_incidencias
+                    WHERE tipos_incidencias.idtipo = $typeid
+                        AND `tipos_incidencias`.`idusuario3` = usuarios.id";
 
         $query = $this->db->query($sql);
 
-        $row = $query->row();
-
         $emails = array();
 
-        $fields = array("idusuario", "idusuario2", "idusuario3");
-        if(isset($row)){
-            foreach($fields as $field){
-                $email = $row->$field;
-                if(strlen($email) > 0){
-                    $emails[$field] = $email;
-                }
-            }
+        foreach ($query->result() as $row) {
+           $emails[] = $row->email;
         }
 
         return $emails;

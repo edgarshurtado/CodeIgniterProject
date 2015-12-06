@@ -57,7 +57,10 @@ class Crud_output extends CI_Model
         $body = $body . "Tipo Incidencia: ". $typeIncidentName . "\n";
         $body = $body ."Decripcion: \n".$post_array['descripcion'] . "\n";
 
-        $this->email_model->mailNewIncident("edsanhu@gmail.com", $body);
+        $to = $this->database_retrieve->
+            getTechniciansEmails($post_array['idtipo']);
+
+        $this->email_model->mailNewIncident($to, $body);
 
         return $post_array;
     }
