@@ -125,6 +125,11 @@ foreach($incidents as $incident){
 }
         ?>
 		</tbody>
+        <tfoot>
+            <?php
+                echo $links;
+            ?>
+        </tfoot>
 	</table>
 	
 	</div>

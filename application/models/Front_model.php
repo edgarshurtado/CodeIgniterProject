@@ -10,14 +10,17 @@ class Front_model extends CI_Model
         parent::__construct();
     }
 
-    public function getOpenIncidents()
+    public function getOpenIncidents($final, $start=0)
     {
-        $sql = "SELECT numero, descripcion_incidencia as tipo, descripcion, ubicacion, 
-            `usuarios`.nombre as usuario, prioridad, fecha_alta
+        $sql = "SELECT numero, descripcion_incidencia as tipo, descripcion, 
+            ubicacion, `usuarios`.nombre as usuario, prioridad, fecha_alta,
+            estado
                 from incidencias, usuarios, tipos_incidencias
                 WHERE `incidencias`.idusuario = `usuarios`.id 
+                AND `incidencias`.estado <> 'CERRADA'
                 AND `tipos_incidencias`.idtipo = `incidencias`.idtipo
-                ORDER BY fecha_alta DESC";
+                ORDER BY fecha_alta DESC
+                LIMIT $start, $final";
 
         $query = $this->db->query($sql);
 
@@ -26,10 +29,13 @@ class Front_model extends CI_Model
 
     public function getOpenIncidentsNum()
     {
-        $sql = "SELECT * from incidencias WHERE estado = 'ABIERTA'";
+        $sql = "SELECT * 
+            FROM incidencias, usuarios
+            WHERE estado <> 'CERRADA' 
+            AND `incidencias`.idusuario = `usuarios`.id";
 
         $query = $this->db->query($sql);
 
-        return $query->num_rownum_rows();
+        return $query->num_rows();
     }
 }

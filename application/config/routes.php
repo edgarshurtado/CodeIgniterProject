@@ -57,4 +57,4 @@ $route['email/(:any)'] = 'email_controller/$1';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['default_controller'] = 'front_controller';
-$route['(:any)'] = 'front_controller/$1';
+$route['(:any)'] = 'front_controller/index/$1';
