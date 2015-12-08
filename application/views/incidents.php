@@ -58,6 +58,7 @@ foreach($css_files as $file): ?>
         <li><a href="<?php echo site_url("backoffice/usuarios")?>"><i class="icon-list-alt"></i><span>Users</span> </a> </li>
         <li><a href="<?php echo site_url("backoffice/tiposIncidencias")?>"><i class="icon-list-alt"></i><span>Incident types</span> </a> </li>
         <li><a href="<?php echo site_url("backoffice/roles")?>"><i class="icon-list-alt"></i><span>Rols</span> </a> </li>
+        <li><a href="<?php echo site_url("backoffice/historic")?>"><i class="icon-list-alt"></i><span>Historic</span> </a> </li>
 
       </ul>
     </div>

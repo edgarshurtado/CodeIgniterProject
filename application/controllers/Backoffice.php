@@ -27,7 +27,7 @@ class Backoffice extends CI_Controller {
     {
         
         $output = $this->Crud_output->usuarios(); 
-        $this->load->view("admin", $output);
+        $this->load->view("users", $output);
     }
 
     public function roles()
@@ -40,5 +40,11 @@ class Backoffice extends CI_Controller {
     {
         $output = $this->Crud_output->tiposIncidencias();
         $this->load->view("incidents_types", $output);
+    }
+
+    public function historic()
+    {
+        $output = $this->Crud_output->historic();
+        $this->load->view("incidents_historic", $output);
     }
 }
