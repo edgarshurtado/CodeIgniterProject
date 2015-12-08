@@ -87,6 +87,11 @@ class Crud_output extends CI_Model
             $body = "Cambio de estado en la incidencia: $incidentID";
 
             $this->email_model->mailNewIncident($emails, $body);
+
+            //save end date
+            if($post_array['estado'] == 'CERRADA'){
+                $post_array['fecha_fin'] = date("Y-m-d H:i:s");
+            }
         }
 
 
@@ -136,6 +141,18 @@ class Crud_output extends CI_Model
         $crud->set_relation("idusuario3", "usuarios", "email");
         $crud->display_as("idusuario3", "Técnico 3");
 
+        return $crud->render();
+    }
+
+    public function historic()
+    {
+        $crud = new grocery_CRUD();
+        $crud->set_table('incidencias');
+        $crud->unset_edit();
+        $crud->unset_add();
+        $crud->unset_delete();
+
+        $crud->like("estado", "CERRADA");
         return $crud->render();
     }
 }
