@@ -19,7 +19,7 @@ class Email_model extends CI_Model
 
     public function sendMail($to, $subject, $body)
     {
-       $this->email->to("edsanhu@gmail.com");
+       $this->email->to($to);
        $this->email->from("system@edgarsh.es");
        $this->email->subject($subject);
        $this->email->message("$body");

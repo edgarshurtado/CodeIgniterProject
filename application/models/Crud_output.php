@@ -91,6 +91,9 @@ class Crud_output extends CI_Model
             //save end date
             if($post_array['estado'] == 'CERRADA'){
                 $post_array['fecha_fin'] = date("Y-m-d H:i:s");
+                //$relatadUser = $incidentInfo->idusuario;
+                //$relatadUser = $this->database_retrieve->getUserMail($relatadUser);
+                //$this->email_model->mailNewIncident($relatadUser, "CERRADA");
             }
         }
 
